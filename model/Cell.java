@@ -4,7 +4,6 @@ public class Cell {
     private int row;
     private int col;
     private int value;
-    private World world = World.getInstance();
 
     public Cell(int row, int col){
         this.row = row;
@@ -22,6 +21,14 @@ public class Cell {
 
     public void setCol(int col) {
         this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 
     public void setValue(int value) {
