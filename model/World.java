@@ -3,30 +3,29 @@ package model;
 import java.util.*;
 
 public class World {
-    private String hello;
-    private Cell[][] grid = new Cell[64][64];
+    private final int WORLD_MAX_SIZE = 104;
+    private final int BORDER = 20;
+    private final int SCREEN_MAX_SIZE = WORLD_MAX_SIZE - BORDER;
+    private Cell[][] grid = new Cell[WORLD_MAX_SIZE][WORLD_MAX_SIZE];
+    private Cursor cursor = new Cursor();
+
     private World(){
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid.length; col++) {
                 grid[row][col] = new Cell(row, col);
             }
         }
-        hello = new String("hello world !!!!");
-    }
-
-    public String getString(){
-        return hello; 
     }
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid.length; col++) {
+        for (int row = BORDER; row < SCREEN_MAX_SIZE; row++) {
+            for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
                 sb.append(grid[row][col].getValue());
                 sb.append("|");
             }
             sb.append("\n");
-            for (int col = 0; col < grid.length; col++) {
+            for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
                 sb.append("--");
             }
             sb.append("\n");
@@ -43,7 +42,7 @@ public class World {
         int counter = 0;
 
         int startPosX = cell.getCol() - 1 < 0 ? cell.getCol() : cell.getCol() - 1;
-        int startPosY = cell.getRow() - 1 < 0 ? cell.getRow(): cell.getRow() - 1 ;
+        int startPosY = cell.getRow() - 1 < 0 ? cell.getRow() : cell.getRow() - 1 ;
         int endPosX =   cell.getCol() + 1 > 63 ? cell.getCol() : cell.getCol() + 1;
         int endPosY =   cell.getRow() + 1 > 63 ? cell.getRow() : cell.getRow() + 1;
 
@@ -59,6 +58,7 @@ public class World {
         }
         return counter - 1;
     }
+
     /*
         Any live cell with two or three live neighbours survives.
         Any dead cell with three live neighbours becomes a live cell.
@@ -77,9 +77,19 @@ public class World {
         }
     }
     public void next(){
-        for (int row = 0; row < 64; row++) {
-            for (int col = 0; col < 64; col++) {
+        for (int row = 0; row < WORLD_MAX_SIZE; row++) {
+            for (int col = 0; col < WORLD_MAX_SIZE; col++) {
                 setCellState(grid[row][col]);
+            }
+        }
+    }
+
+    public void placePattern(Pattern pattern){
+        
+        for (int row = cursor.getY(); row < pattern.getLength(); row++) {
+            for (int col = cursor.getX(); col < pattern.getWidth(); col++) {
+                if(grid[cursor.getY() + row][cursor.getX() + col].getValue() == 0)
+                    grid[cursor.getY() + row][cursor.getX() + col] = pattern.getPattern()[row][col];
             }
         }
     }

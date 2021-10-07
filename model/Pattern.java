@@ -2,6 +2,12 @@ package model;
 
 public abstract class Pattern {
     protected Cell[][] pattern;
-    
-    abstract public Cell[][] getPattern();
+
+    public Cell[][] getPattern(){
+        return this.pattern;
+    }
+
+    public abstract int  getLength();
+    public abstract int getWidth();
+
 }
