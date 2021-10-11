@@ -9,9 +9,9 @@ public class blockPattern extends Pattern {
 
     public blockPattern(){
         this.pattern =  new Cell[LENGTH][WIDTH];
-
-        for (int row = 0; row < pattern.length; row++) {
-            for (int col = 0; col < pattern.length; col++) {
+        for (int row = 0; row < LENGTH; row++) {
+            for (int col = 0; col < WIDTH; col++) {
+                pattern[row][col] = new Cell(row, col);
                 pattern[row][col].setValue(1);
             }
         }
@@ -26,5 +26,4 @@ public class blockPattern extends Pattern {
     public int getWidth() {
         return WIDTH;
     }
-
-   ]
+}

@@ -1,24 +1,30 @@
 package model;
 
+import model.patterns.*;
+
 public class Cursor {
-    private Pattern pattern;
+    //this should become an array that will hold all of the patterns
+    private Pattern[] patterns = {new blockPattern()};
+    private Pattern selectedPattern;
     private int x;
     private int y;
-    private final int SCREEN_MAX_SIZE = 84;
+    private final int SCREEN_MAX_SIZE = 104;
     private final int SCREEN_MIN_SIZE = 20;
 
     public Cursor(){
-        this.x = 42;
-        this.y = 42;
+        this.x = 52;
+        this.y = 52;
     }
-    
-    public Pattern getPattern() {
-        return pattern;
+    //should return the currently selected pattern
+    public Pattern getSelectedPattern() {
+        System.out.println("I was used");
+        return selectedPattern;
     }
 
-    public void setPattern(Pattern pattern) {
-        //bounds check to see if the current pattern will fit aorund the cursor.
-        this.pattern = pattern;
+    //should become a counter where that counter will represent the index of the internal pattern array.
+    public void setSelectedPattern(int index) {
+        System.out.println("I was use222d");
+        this.selectedPattern = this.patterns[index];
     }
     
     public int getX() {
@@ -57,4 +63,7 @@ public class Cursor {
                 break;
         }
     }
+
+
+    
 }

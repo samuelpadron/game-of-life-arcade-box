@@ -5,7 +5,7 @@ import java.util.*;
 public class World {
     private final int WORLD_MAX_SIZE = 104;
     private final int BORDER = 20;
-    private final int SCREEN_MAX_SIZE = WORLD_MAX_SIZE - BORDER;
+    private final int SCREEN_MAX_SIZE = WORLD_MAX_SIZE - BORDER; 
     private Cell[][] grid = new Cell[WORLD_MAX_SIZE][WORLD_MAX_SIZE];
     private Cursor cursor = new Cursor();
 
@@ -53,9 +53,9 @@ public class World {
             }
         }  
         
-        if( counter > 0) {
-            System.out.println("I'm at " + cell.getRow() + ", " + cell.getCol() + " and have " + counter);
-        }
+        // if( counter > 0) {
+        //     System.out.println("I'm at " + cell.getRow() + ", " + cell.getCol() + " and have " + counter);
+        // }
         return counter - 1;
     }
 
@@ -84,14 +84,32 @@ public class World {
         }
     }
 
-    public void placePattern(Pattern pattern){
+    
+
+    public void placePattern(){
+        int counterY = 0;
+        int counterX = 0;
+        //this is not a good solution -> hovering is not supported
         
-        for (int row = cursor.getY(); row < pattern.getLength(); row++) {
-            for (int col = cursor.getX(); col < pattern.getWidth(); col++) {
-                if(grid[cursor.getY() + row][cursor.getX() + col].getValue() == 0)
-                    grid[cursor.getY() + row][cursor.getX() + col] = pattern.getPattern()[row][col];
+
+        System.out.println(cursor.getSelectedPattern().getLength());
+        for (int row = cursor.getY(); row < cursor.getY() + cursor.getSelectedPattern().getLength(); row++) {
+            for (int col = cursor.getX(); col <  cursor.getX() + cursor.getSelectedPattern().getWidth(); col++) {
+                if(grid[cursor.getY() + counterY][cursor.getX() + counterX].getValue() == 0){
+                    grid[cursor.getY() + counterY][cursor.getX() + counterX].setValue(cursor.getSelectedPattern().getPattern()[counterY][counterX].getValue());
+                }
+                counterX++;
             }
+            counterX = 0;
+            counterY++;
         }
+    }
+
+    public void move(Direction direction){
+        cursor.move(direction);
+    }
+    public void setSelectedPattern(int index){
+        cursor.setSelectedPattern(index);
     }
     
     public void start() {
