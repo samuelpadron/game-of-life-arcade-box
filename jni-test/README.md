@@ -9,4 +9,4 @@
 ${JAVA\_HOME} = /usr/lib/jvm/JAVAVERSION <br> 
 `g++ -shared -fPIC -o libLIBRARYNAME.so FILENAME.o -lc`
 ### Running
-java -cp . -Djava.library.path=/LIBRARYDIR
+`java -cp . -Djava.library.path=/LIBRARYDIR`
