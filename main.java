@@ -5,7 +5,7 @@ import model.patterns.blockPattern;
 public class main {
 
     static {
-        System.loadLibrary("native");
+        System.loadLibrary("rgbmatrix");
     }
 
 
