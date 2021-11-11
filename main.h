@@ -12,7 +12,7 @@ extern "C" {
  * Method:    pixel
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_main_pixel
+JNIEXPORT jint JNICALL Java_main_pixel
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

@@ -59,7 +59,7 @@ private:
   }
 };
 
-JNIEXPORT jobject JNICALL Java_main_pixel
+JNIEXPORT jint JNICALL Java_main_pixel
 	(JNIEnv *env, jobject thisObject) {
 		int runtime_seconds = -1;
   		int demo = -1;
