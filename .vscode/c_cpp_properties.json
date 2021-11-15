@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/lib/jvm/java-11-openjdk-amd64/include/**"
+                "/usr/lib/jvm/default-java/include/**",
+                "/home/pi/A3/view/include/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",

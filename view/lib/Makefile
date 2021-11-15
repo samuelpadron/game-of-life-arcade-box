@@ -165,12 +165,12 @@ INCDIR=../include
 CFLAGS=-Wall -O3 -g -fPIC $(DEFINES) -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS) -fno-exceptions
 
-all : $(TARGET).a $(TARGET).so.1
+all : $(TARGET).a $(TARGET).so
 
 $(TARGET).a : $(OBJECTS)
 	$(AR) rcs $@ $^
 
-$(TARGET).so.1 : $(OBJECTS)
+$(TARGET).so : $(OBJECTS)
 	$(CXX) -shared -Wl,-soname,$@ -o $@ $^ -lpthread  -lrt -lm -lpthread
 
 led-matrix.o: led-matrix.cc $(INCDIR)/led-matrix.h
@@ -186,7 +186,7 @@ graphics.o: graphics.cc utf8-internal.h
 	$(CC)  -I$(INCDIR) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(OBJECTS) $(TARGET).a $(TARGET).so.1
+	rm -f $(OBJECTS) $(TARGET).a $(TARGET).so
 
 compiler-flags: FORCE
 	@echo '$(CXX) $(CXXFLAGS)' | cmp -s - $@ || echo '$(CXX) $(CXXFLAGS)' > $@
