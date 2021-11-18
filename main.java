@@ -18,8 +18,8 @@ public class main {
         world.placePattern();
         world.next();
 	*/
-	System.out.println(new main().pixel());
+	new main().pixel();
     }
 
-    private native int pixel();
+    private native void pixel();
 }

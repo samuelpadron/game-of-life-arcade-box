@@ -60,7 +60,7 @@ private:
 };
 
 
-JNIEXPORT jint JNICALL Java_main_pixel
+JNIEXPORT void JNICALL Java_main_pixel
 	(JNIEnv *env, jobject thisObject) {
 		std::cout << "hello!" << std::endl;
 		int runtime_seconds = -1;
@@ -81,7 +81,7 @@ JNIEXPORT jint JNICALL Java_main_pixel
 
 		RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, runtime_opt);
 		if (matrix == NULL)
-			return 1;
+			return;
 
 		printf("Size: %dx%d. Hardware gpio mapping: %s\n",
 				matrix->width(), matrix->height(), matrix_options.hardware_mapping);
@@ -112,6 +112,5 @@ JNIEXPORT jint JNICALL Java_main_pixel
 
 		printf("\%s. Exiting.\n",
 				interrupt_received ? "Received CTRL-C" : "Timeout reached");
-		return 0;
 	}
 
