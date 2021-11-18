@@ -59,8 +59,10 @@ private:
   }
 };
 
+
 JNIEXPORT jint JNICALL Java_main_pixel
 	(JNIEnv *env, jobject thisObject) {
+		std::cout << "hello!" << std::endl;
 		int runtime_seconds = -1;
   		int demo = -1;
   		int scroll_ms = 30;

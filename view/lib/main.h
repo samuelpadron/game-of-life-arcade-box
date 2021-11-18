@@ -10,7 +10,7 @@ extern "C" {
 /*
  * Class:     main
  * Method:    pixel
- * Signature: ()V
+ * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_main_pixel
   (JNIEnv *, jobject);
