@@ -17,13 +17,11 @@ public class Cursor {
     }
     //should return the currently selected pattern
     public Pattern getSelectedPattern() {
-        System.out.println("I was used");
         return selectedPattern;
     }
 
     //should become a counter where that counter will represent the index of the internal pattern array.
     public void setSelectedPattern(int index) {
-        System.out.println("I was use222d");
         this.selectedPattern = this.patterns[index];
     }
     
