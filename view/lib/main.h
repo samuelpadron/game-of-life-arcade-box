@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     main
  * Method:    pixel
- * Signature: ()I
+ * Signature: ([I)V
  */
 JNIEXPORT void JNICALL Java_main_pixel
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jintArray);
 
 #ifdef __cplusplus
 }
