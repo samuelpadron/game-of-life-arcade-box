@@ -53,9 +53,6 @@ public class World {
             }
         }  
         
-        // if( counter > 0) {
-        //     System.out.println("I'm at " + cell.getRow() + ", " + cell.getCol() + " and have " + counter);
-        // }
         return counter - 1;
     }
 
@@ -68,7 +65,6 @@ public class World {
     private void setCellState(Cell cell) {
         int amountOfLiveNeightbours = countLiveNeighbours(cell);
         if(cell.getValue() == 1 && ( amountOfLiveNeightbours == 2 || amountOfLiveNeightbours == 3 )){
-            System.out.println("here?");
             cell.setValue(1);
         }else if(cell.getValue() == 0 && amountOfLiveNeightbours == 3){
             cell.setValue(1);
@@ -76,6 +72,26 @@ public class World {
             cell.setValue(0);
         }
     }
+
+    public int[] cellToInt() {
+
+    //Make a list to append values to
+    List<Integer> intList = new ArrayList<Integer>();
+    for (int i = 0; i < grid.length; i++) {
+        for (int j = 0; j < grid.length; j++) { 
+            intList.add(grid[i][j].getValue()); 
+        }
+    }
+
+    //Make the 1d array to send to C++
+    int[] intVersion = new int[intList.size()];
+    for (int i = 0; i < intVersion.length; i++) {
+        intVersion[i] = intList.get(i);
+    }
+
+    return intVersion;
+    }
+
     public void next(){
         for (int row = 0; row < WORLD_MAX_SIZE; row++) {
             for (int col = 0; col < WORLD_MAX_SIZE; col++) {
@@ -83,8 +99,6 @@ public class World {
             }
         }
     }
-
-    
 
     public void placePattern(){
         int counterY = 0;
@@ -121,5 +135,6 @@ public class World {
         return new World();
     }
 
+    
    
 }

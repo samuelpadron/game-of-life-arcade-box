@@ -10,16 +10,15 @@ public class main {
 
 
     public static void main(String[] args){
-	System.out.println(System.getProperty("java.library.path"));
-	/*
         World world = World.getInstance();
-        // world.start();
+        //world.start();
         world.setSelectedPattern(0);
         world.placePattern();
         world.next();
-	*/
-	new main().pixel();
+        System.out.println(world);
+        int[] line = world.cellToInt();
+	    //new main().pixel(line);
     }
 
-    private native void pixel();
+    private native void pixel(int[] intGrid);
 }
