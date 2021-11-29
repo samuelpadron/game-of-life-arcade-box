@@ -54,20 +54,27 @@ public:
 
 	void Run()
 	{
-		jint *body = env->GetIntArrayElements(arr, 0);
-		for (int i = 0; i < canvas()->width() * canvas()->height(); i++)
-		{
-			// this works but it doesn't work for body[i] == 1, seems all are set to 0
-			if( (int) body[i] == 0 )
-				canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 255, 0, 0);
-			else
-				canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 0, 255, 0);
-		}
-		env->ReleaseIntArrayElements(arr, body, 0);
+		jsize len = (*env)->GetArrayLength(env, arr);
+		int i, sum = 0;
+		jint *body = (*env)->GetIntArrayElements(env, arr, 0);
+		for (i = 0; i < len; i++)
+			sum += body[i];
+		(*env)->ReleaseIntArrayElements(env, arr, body, 0);
+		std::cout << sum << std::endl;
+
+		// jint *body = env->GetIntArrayElements(arr, 0);
+		// for (int i = 0; i < canvas()->width() * canvas()->height(); i++)
+		// {
+		// 	// this works but it doesn't work for body[i] == 1, seems all are set to 0
+		// 	if( (int) body[i] == 0 )
+		// 		canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 255, 0, 0);
+		// 	else
+		// 		canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 0, 255, 0);
+		// }
+		// env->ReleaseIntArrayElements(arr, body, 0);
 	}
 
 private:
-
 	JNIEnv *env;
 	jintArray arr;
 	void Rotate(int x, int y, float angle,
