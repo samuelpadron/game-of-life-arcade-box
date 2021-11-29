@@ -71,7 +71,7 @@ public:
 		// 	else
 		// 		canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 0, 255, 0);
 		// }
-		// env->ReleaseIntArrayElements(arr, body, 0);
+		env->ReleaseIntArrayElements(arr, body, 0);
 	}
 
 private:
