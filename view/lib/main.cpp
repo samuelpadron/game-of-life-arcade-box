@@ -54,12 +54,19 @@ public:
 
 	void Run()
 	{
-		jsize len = (*env)->GetArrayLength(env, arr);
+		jsize len = env->GetArrayLength(arr);
 		int i, sum = 0;
-		jint *body = (*env)->GetIntArrayElements(env, arr, 0);
-		for (i = 0; i < len; i++)
-			sum += body[i];
-		(*env)->ReleaseIntArrayElements(env, arr, body, 0);
+		jint *body = env->GetIntArrayElements(arr, 0);
+		for (i = 0; i < len; i++) {
+			if (body[i] == 1) {
+				std::cout << i  << std::endl;
+				std::cout << i / canvas()->width()  << std::endl;
+				std::cout << i % canvas()->height()  << std::endl;
+				sum += 1;
+				canvas()->SetPixel(canvas()->width() / 2, canvas()->height() / 2, 255, 0, 0);
+			}
+		}
+		env->ReleaseIntArrayElements(arr, body, 0);
 		std::cout << sum << std::endl;
 
 		// jint *body = env->GetIntArrayElements(arr, 0);
@@ -71,7 +78,16 @@ public:
 		// 	else
 		// 		canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 0, 255, 0);
 		// }
-		env->ReleaseIntArrayElements(arr, body, 0);
+		// env->ReleaseIntArrayElements(arr, body, 0);
+
+		// for (int i = 0; i < canvas()->width(); i++)
+		// {
+		// 	for (int j = 0; j < canvas()->height(); j++)
+		// 	{
+		// 		canvas()->SetPixel(i, j, 255, 0, 0);
+		// 	}
+		// }
+		std::cout << "hello" << std::endl;
 	}
 
 private:
@@ -96,12 +112,13 @@ JNIEXPORT void JNICALL Java_main_pixel(JNIEnv *env, jobject obj, jintArray arr)
 	rgb_matrix::RuntimeOptions runtime_opt;
 
 	// These are the defaults when no command-line flags are given.
-	matrix_options.rows = 64;
-	matrix_options.cols = 32;
+	matrix_options.rows = 32;
+	matrix_options.cols = 64;
 	matrix_options.chain_length = 2;
-	matrix_options.parallel = 1;
+	//matrix_options.parallel = 1;
 	runtime_opt.gpio_slowdown = 2;
 	matrix_options.hardware_mapping = "adafruit-hat";
+	//matrix_options.multiplexing = 1;
 
 	RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, runtime_opt);
 	if (matrix == NULL)

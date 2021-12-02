@@ -17,7 +17,7 @@ public class main {
         world.next();
         System.out.println(world);
         int[] line = world.cellToInt();
-	    //new main().pixel(line);
+	    new main().pixel(line);
     }
 
     private native void pixel(int[] intGrid);
