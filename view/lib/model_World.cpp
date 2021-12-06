@@ -59,15 +59,15 @@ public:
 		jint *body = env->GetIntArrayElements(arr, 0);
 		for (i = 0; i < len; i++) {
 			if (body[i] == 1) {
-				std::cout << i  << std::endl;
-				std::cout << i / 104  << std::endl;
-				std::cout << i % 104 << std::endl;
-				sum += 1;
+				// std::cout << i  << std::endl;
+				// std::cout << i / 104  << std::endl;
+				// std::cout << i % 104 << std::endl;
+				// sum += 1;
 				canvas()->SetPixel((i / 104) - 20, (i % 104) - 20, 255, 0, 0);
 			}
 		}
 		env->ReleaseIntArrayElements(arr, body, 0);
-		std::cout << sum << std::endl;
+		// std::cout << sum << std::endl;
 
 		// jint *body = env->GetIntArrayElements(arr, 0);
 		// for (int i = 0; i < canvas()->width() * canvas()->height(); i++)

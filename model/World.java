@@ -98,7 +98,6 @@ public class World {
     }
 
     public void next(){
-        System.out.println("boop bap");
         for (int row = 0; row < WORLD_MAX_SIZE; row++) {
             for (int col = 0; col < WORLD_MAX_SIZE; col++) {
                 setCellState(grid[row][col]);
