@@ -178,7 +178,7 @@ thread.o : thread.cc $(INCDIR)/thread.h
 framebuffer.o: framebuffer.cc framebuffer-internal.h
 multiplex-transformers.o : multiplex-transformers.cc multiplex-transformers-internal.h
 graphics.o: graphics.cc utf8-internal.h
-main.o: main.cpp main.h
+model_World.o: model_World.cpp model_World.h
 
 %.o : %.cc compiler-flags
 	$(CXX) -I$(INCDIR) $(CXXFLAGS) -c -o $@ $<

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "model_World.h"
 
 #include "led-matrix.h"
 #include "threaded-canvas-manipulator.h"
@@ -103,9 +103,8 @@ private:
 	}
 };
 
-JNIEXPORT void JNICALL Java_main_pixel(JNIEnv *env, jobject obj, jintArray arr)
+JNIEXPORT void JNICALL Java_model_World_toMatrix(JNIEnv *env, jobject obj, jintArray arr)
 {
-
 	int runtime_seconds = -1;
 	int demo = -1;
 	int scroll_ms = 30;
