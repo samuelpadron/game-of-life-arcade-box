@@ -4,10 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import javax.swing.*;
 
+import model.Direction;
+import model.World;
+
 public class Controller extends JFrame implements KeyListener, ActionListener, Runnable {
 
     JTextArea displayArea;
     JTextField typingArea;
+    World world = World.getInstance();
     static final String newline = System.getProperty("line.separator");
 
     public Controller(String name) {
@@ -15,58 +19,51 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
     }
 
     private static void createAndShowGUI() {
-        // Create and set up the window.
         Controller frame = new Controller("Controller");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Set up the content pane.
         frame.addComponentsToPane();
-
-        // Display the window.
         frame.pack();
         frame.setVisible(true);
     }
 
     private void addComponentsToPane() {
-
-        // JButton button = new JButton("Clear");
-        // button.addActionListener(this);
-
         typingArea = new JTextField(20);
         typingArea.addKeyListener(this);
-
         displayArea = new JTextArea();
         displayArea.setEditable(false);
-        // JScrollPane scrollPane = new JScrollPane(displayArea);
-        // scrollPane.setPreferredSize(new Dimension(375, 125));
-
         getContentPane().add(typingArea, BorderLayout.PAGE_START);
-        // getContentPane().add(scrollPane, BorderLayout.CENTER);
-        // getContentPane().add(button, BorderLayout.PAGE_END);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        // Clear the text components.
         displayArea.setText("");
         typingArea.setText("");
-
-        // Return the focus to the typing area.
         typingArea.requestFocusInWindow();
-
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        displayInfo(e, "KEY PRESSED: ");
+        // displayInfo(e, "KEY PRESSED: ");
+        System.out.println(world);
+        if(e.getKeyCode() == 37){
+            world.move(Direction.LEFT);
+            System.out.println(world.getCursorPosition());
+        }else if((e.getKeyCode() == 38)){
+            world.move(Direction.UP);
+            System.out.println(world.getCursorPosition());
+        }else if((e.getKeyCode() == 39)){
+            world.move(Direction.RIGHT);
+            System.out.println(world.getCursorPosition());
+        }else if((e.getKeyCode() == 40)){
+            world.move(Direction.DOWN);
+            System.out.println(world.getCursorPosition());
+        } System.out.println(world.getCursorPosition());
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
         // displayInfo(e, "KEY RELEASED: ");
     }
 
@@ -75,11 +72,10 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
         // TODO Auto-generated method stub
 
     }
-    
-    private void displayInfo(KeyEvent e, String keyStatus){
-         
-        //You should only rely on the key char if the event
-        //is a key typed event.
+
+    // This is not needed in the end product
+    private void displayInfo(KeyEvent e, String keyStatus) {
+
         int id = e.getID();
         String keyString;
         if (id == KeyEvent.KEY_TYPED) {
@@ -92,7 +88,7 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
                     + KeyEvent.getKeyText(keyCode)
                     + ")";
         }
-         
+
         int modifiersEx = e.getModifiersEx();
         String modString = "extended modifiers = " + modifiersEx;
         String tmpString = KeyEvent.getModifiersExText(modifiersEx);
@@ -101,14 +97,14 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
         } else {
             modString += " (no extended modifiers)";
         }
-         
+
         String actionString = "action key? ";
         if (e.isActionKey()) {
             actionString += "YES";
         } else {
             actionString += "NO";
         }
-         
+
         String locationString = "key location: ";
         int location = e.getKeyLocation();
         if (location == KeyEvent.KEY_LOCATION_STANDARD) {
@@ -119,14 +115,14 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
             locationString += "right";
         } else if (location == KeyEvent.KEY_LOCATION_NUMPAD) {
             locationString += "numpad";
-        } else { // (location == KeyEvent.KEY_LOCATION_UNKNOWN)
+        } else {
             locationString += "unknown";
         }
-         System.out.println(keyStatus + newline
-         + "    " + keyString + newline
-         + "    " + modString + newline
-         + "    " + actionString + newline
-         + "    " + locationString + newline);
+        System.out.println(keyStatus + newline
+                + "    " + keyString + newline
+                + "    " + modString + newline
+                + "    " + actionString + newline
+                + "    " + locationString + newline);
 
         displayArea.append(keyStatus + newline
                 + "    " + keyString + newline
