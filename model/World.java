@@ -128,6 +128,9 @@ public class World {
     public void move(Direction direction){
         cursor.move(direction);
     }
+    public String getCursorPosition(){
+        return String.valueOf(cursor.getX()) + ", " + String.valueOf(cursor.getY());
+    }
     public void setSelectedPattern(int index){
         cursor.setSelectedPattern(index);
     }
