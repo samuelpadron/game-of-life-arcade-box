@@ -60,10 +60,10 @@ public:
 		for (i = 0; i < len; i++) {
 			if (body[i] == 1) {
 				std::cout << i  << std::endl;
-				std::cout << i / canvas()->width()  << std::endl;
-				std::cout << i % canvas()->height()  << std::endl;
+				std::cout << i / 104  << std::endl;
+				std::cout << i % 104 << std::endl;
 				sum += 1;
-				canvas()->SetPixel(canvas()->width() / 2, canvas()->height() / 2, 255, 0, 0);
+				canvas()->SetPixel((i / 104) - 20, (i % 104) - 20, 255, 0, 0);
 			}
 		}
 		env->ReleaseIntArrayElements(arr, body, 0);
@@ -87,7 +87,9 @@ public:
 		// 		canvas()->SetPixel(i, j, 255, 0, 0);
 		// 	}
 		// }
-		std::cout << "hello" << std::endl;
+		// canvas()->SetPixel(42, 42, 255, 0, 0);
+		std::cout << canvas()->width() << std::endl;
+		std::cout << canvas()->height() << std::endl;
 	}
 
 private:
@@ -112,14 +114,14 @@ JNIEXPORT void JNICALL Java_main_pixel(JNIEnv *env, jobject obj, jintArray arr)
 	rgb_matrix::RuntimeOptions runtime_opt;
 
 	// These are the defaults when no command-line flags are given.
+	// sudo ./demo -D0 --led-slowdown-gpio=4 --led-no-hardware-pulse --led-chain=2 --led-rows=32 --led-cols=63 --led-pixel-mapper=U-mapper;Rotate:180
 	matrix_options.rows = 32;
 	matrix_options.cols = 64;
 	matrix_options.chain_length = 2;
-	//matrix_options.parallel = 1;
-	runtime_opt.gpio_slowdown = 2;
+	runtime_opt.gpio_slowdown = 4;
 	matrix_options.hardware_mapping = "adafruit-hat";
-	//matrix_options.multiplexing = 1;
-
+	matrix_options.pixel_mapper_config= "U-mapper;Rotate:180";
+	matrix_options.disable_hardware_pulsing = true;
 	RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, runtime_opt);
 	if (matrix == NULL)
 		return;
