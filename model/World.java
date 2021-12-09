@@ -1,8 +1,9 @@
 package model;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit ; 
 
-public class World {
+public class World implements Runnable {
 
     static {
         System.loadLibrary("rgbmatrix");
@@ -103,6 +104,7 @@ public class World {
                 setCellState(grid[row][col]);
             }
         }
+        System.out.println(this);
         toMatrix(this.cellToInt());
     }
 
@@ -135,9 +137,10 @@ public class World {
         cursor.setSelectedPattern(index);
     }
     
-    public void start() {
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new Clock(), 0, 1000);
+    public void run() {
+        // Timer timer = new Timer();
+        // timer.scheduleAtFixedRate(new Clock(), 0, 1000);
+        this.next();
     }
 
     public static World getInstance(){

@@ -5,7 +5,7 @@ import model.Pattern;
 
 public class blockPattern extends Pattern {
     private final int LENGTH = 2;
-    private final int WIDTH = 2;
+    private final int WIDTH = 3;
 
     public blockPattern(){
         this.pattern =  new Cell[LENGTH][WIDTH];
