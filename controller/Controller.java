@@ -7,7 +7,7 @@ import javax.swing.*;
 import model.Direction;
 import model.World;
 
-public class Controller extends JFrame implements KeyListener, ActionListener, Runnable {
+public class Controller extends JFrame implements KeyListener, ActionListener, Thread{
 
     JTextArea displayArea;
     JTextField typingArea;
