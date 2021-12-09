@@ -140,7 +140,10 @@ public class World implements Runnable {
     public void run() {
         // Timer timer = new Timer();
         // timer.scheduleAtFixedRate(new Clock(), 0, 1000);
-        this.next();
+		while(true){
+			this.next();
+			System.out.println("next is calculated");
+		}
     }
 
     public static World getInstance(){
