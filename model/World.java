@@ -1,13 +1,14 @@
 package model;
 
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit ; 
 
 public class World implements Runnable {
 
-    static {
-        System.loadLibrary("rgbmatrix");
-    }
+    // static {
+    //     System.loadLibrary("rgbmatrix");
+    // }
 
     private final int WORLD_MAX_SIZE = 104;
     private final int BORDER = 20;
@@ -105,7 +106,7 @@ public class World implements Runnable {
             }
         }
         System.out.println(this);
-        toMatrix(this.cellToInt());
+        // toMatrix(this.cellToInt());
     }
 
     public void placePattern(){
@@ -150,7 +151,23 @@ public class World implements Runnable {
         return new World();
     }
 
-    private native void toMatrix(int[] intGrid);
+    public void toFile() throws IOException{
+        StringBuilder sb = new StringBuilder();
+        for (int row = BORDER; row < SCREEN_MAX_SIZE; row++) {
+            for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
+                sb.append(grid[row][col].getValue());
+            }
+            sb.append("\n");
+            for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
+            }
+        }
+		BufferedWriter writer = new BufferedWriter(new FileWriter("./view/matrix.txt"));
+		writer.write(sb.toString());
+        writer.close();
+    }
+
+
+    // private native void toMatrix(int[] intGrid);
     
    
 }

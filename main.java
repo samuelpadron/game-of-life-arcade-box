@@ -9,18 +9,23 @@ import java.util.concurrent.TimeUnit;
 public class main {
     
     public static void main(String[] args){
-        Controller controller = new Controller("bruh");
+        // Controller controller = new Controller("bruh");
         World world = World.getInstance();
-        world.setSelectedPattern(0);
-        world.placePattern();
-        System.out.println(world);
-        ScheduledExecutorService executorService;
-        executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleAtFixedRate(world, 0, 1, TimeUnit.SECONDS);
+        try{
+            world.toFile();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+        // world.setSelectedPattern(0);
+        // world.placePattern();
+        // System.out.println(world);
+        // ScheduledExecutorService executorService;
+        // executorService = Executors.newSingleThreadScheduledExecutor();
+        // executorService.scheduleAtFixedRate(world, 0, 1, TimeUnit.SECONDS);
         // Thread worldThread = new Thread(world);
-        Thread controlThread = new Thread(controller);
+        // Thread controlThread = new Thread(controller);
         // worldThread.start();
-        controlThread.start();
+        // controlThread.start();
     }
 }
 

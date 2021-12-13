@@ -1,11 +1,9 @@
-#include "model_World.h"
+#include "../include/led-matrix.h"
+#include "../include/threaded-canvas-manipulator.h"
+#include "../include/pixel-mapper.h"
+#include "../include/graphics.h"
 
-#include "led-matrix.h"
-#include "threaded-canvas-manipulator.h"
-#include "pixel-mapper.h"
-#include "graphics.h"
 
-#include <iostream>
 #include <string>
 #include <assert.h>
 #include <getopt.h>
@@ -16,8 +14,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <fstream>
 #include <algorithm>
+#include <iostream>
 
 using std::max;
 using std::min;
@@ -37,10 +36,8 @@ static void InterruptHandler(int signo)
 class RotatingBlockGenerator : public ThreadedCanvasManipulator
 {
 public:
-	RotatingBlockGenerator(Canvas *m, JNIEnv *env, jintArray arr) : ThreadedCanvasManipulator(m)
+	RotatingBlockGenerator(Canvas *m) : ThreadedCanvasManipulator(m)
 	{
-		this->env = env;
-		this->arr = arr;
 	}
 
 	uint8_t scale_col(int val, int lo, int hi)
@@ -54,47 +51,21 @@ public:
 
 	void Run()
 	{
-		jsize len = env->GetArrayLength(arr);
-		int i, sum = 0;
-		jint *body = env->GetIntArrayElements(arr, 0);
-		for (i = 0; i < len; i++) {
-			if (body[i] == 1) {
-				// std::cout << i  << std::endl;
-				// std::cout << i / 104  << std::endl;
-				// std::cout << i % 104 << std::endl;
-				// sum += 1;
-				canvas()->SetPixel((i / 104) - 20, (i % 104) - 20, 255, 0, 0);
-			}
-		}
-		env->ReleaseIntArrayElements(arr, body, 0);
-		// std::cout << sum << std::endl;
-
-		// jint *body = env->GetIntArrayElements(arr, 0);
-		// for (int i = 0; i < canvas()->width() * canvas()->height(); i++)
-		// {
-		// 	// this works but it doesn't work for body[i] == 1, seems all are set to 0
-		// 	if( (int) body[i] == 0 )
-		// 		canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 255, 0, 0);
-		// 	else
-		// 		canvas()->SetPixel(i / canvas()->width(), i % canvas()->height(), 0, 255, 0);
-		// }
-		// env->ReleaseIntArrayElements(arr, body, 0);
-
-		// for (int i = 0; i < canvas()->width(); i++)
-		// {
-		// 	for (int j = 0; j < canvas()->height(); j++)
-		// 	{
-		// 		canvas()->SetPixel(i, j, 255, 0, 0);
-		// 	}
-		// }
-		// canvas()->SetPixel(42, 42, 255, 0, 0);
-		std::cout << canvas()->width() << std::endl;
-		std::cout << canvas()->height() << std::endl;
+		std::ifstream inputFile;
+		
+		while(true){
+			//read from file,
+			inputFile.open("../matrix.txt");
+			if(inputFile.good())
+				std::cout << "file opened";
+			//parsefile should give us a vector with the matrix.
+			//then we display that matrix;
+			//OPTIONAL: run at 24 HERTZ
+			
+		}	
 	}
 
 private:
-	JNIEnv *env;
-	jintArray arr;
 	void Rotate(int x, int y, float angle,
 				float *new_x, float *new_y)
 	{
@@ -103,7 +74,7 @@ private:
 	}
 };
 
-JNIEXPORT void JNICALL Java_model_World_toMatrix(JNIEnv *env, jobject obj, jintArray arr)
+	void Java_model_World_toMatrix()
 {
 	int runtime_seconds = -1;
 	int demo = -1;
@@ -132,7 +103,7 @@ JNIEXPORT void JNICALL Java_model_World_toMatrix(JNIEnv *env, jobject obj, jintA
 
 	ThreadedCanvasManipulator *image_gen = NULL;
 
-	image_gen = new RotatingBlockGenerator(canvas, env, arr);
+	image_gen = new RotatingBlockGenerator(canvas);
 
 	signal(SIGTERM, InterruptHandler);
 	signal(SIGINT, InterruptHandler);
