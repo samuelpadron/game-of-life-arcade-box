@@ -1,6 +1,12 @@
 # TODO
 - Find how to make the JNI method stop running without it having to kill everything as well
 
+# RGB Matrix
+
+```
+sudo ./demo -D0 --led-slowdown-gpio=4 --led-no-hardware-pulse --led-chain=4 --led-pixel-mapper=U-mapper;Rotate:180
+```
+
 # C++
 Compile the JNI method implementation:
 ```
