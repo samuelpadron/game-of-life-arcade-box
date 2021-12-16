@@ -161,7 +161,7 @@ public class World implements Runnable {
             for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
             }
         }
-		BufferedWriter writer = new BufferedWriter(new FileWriter("./view/matrix.txt"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter("matrix.txt"));
 		writer.write(sb.toString());
         writer.close();
     }

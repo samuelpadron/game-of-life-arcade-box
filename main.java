@@ -12,7 +12,11 @@ public class main {
         // Controller controller = new Controller("bruh");
         World world = World.getInstance();
         try{
-            world.toFile();
+
+        	 world.setSelectedPattern(0);
+		 world.placePattern();
+            	world.toFile();
+	    
         }catch(Exception e){
             System.out.println(e.toString());
         }

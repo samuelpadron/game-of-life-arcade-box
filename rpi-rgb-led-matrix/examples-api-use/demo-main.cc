@@ -10,6 +10,9 @@
 #include "pixel-mapper.h"
 #include "graphics.h"
 
+#include <vector>
+#include <iostream>
+#include <fstream>
 #include <assert.h>
 #include <getopt.h>
 #include <limits.h>
@@ -169,21 +172,24 @@ public:
   void Run() {
     const int cent_x = canvas()->width() / 2;
     const int cent_y = canvas()->height() / 2;
+	//open file
+    std::ifstream input;
+	input.open("../../matrix.txt");
+	if(input.good()){
+		std::cout << "fuck yes"<<std::endl;
+	}else{
+		std::cout << "this did not work";
+	}
+	//read matrix from file
+	std::vector<int> kippensoep;
+	int element;
+	for(int i= 0; i< 64; i++){
 
-    // The square to rotate (inner square + black frame) needs to cover the
-    // whole area, even if diagnoal. Thus, when rotating, the outer pixels from
-    // the previous frame are cleared.
-    const int rotate_square = min(canvas()->width(), canvas()->height()) * 1.41;
-    const int min_rotate = cent_x - rotate_square / 2;
-    const int max_rotate = cent_x + rotate_square / 2;
-
-    // The square to display is within the visible area.
-    const int display_square = min(canvas()->width(), canvas()->height()) * 0.7;
-    const int min_display = cent_x - display_square / 2;
-    const int max_display = cent_x + display_square / 2;
-
-    const float deg_to_rad = 2 * 3.14159265 / 360;
-    int rotation = 0;
+	while(input >> element){
+		kippensoep.push_back(element);
+	}}
+	std::cout << kippensoep.size();
+	//place matrix on panel
     while (running() && !interrupt_received) {
     	canvas()->SetPixel(44,44,0,0,255);
     }
