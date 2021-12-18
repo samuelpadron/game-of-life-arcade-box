@@ -45,7 +45,7 @@ public class World implements Runnable {
         this.grid[x][y].setValue(1);
     }
     
-    public int countLiveNeighbours(Cell cell){
+    public void countLiveNeighbours(Cell cell){
         int counter = 0;
 
         int startPosX = cell.getCol() - 1 < 0 ? cell.getCol() : cell.getCol() - 1;
@@ -60,7 +60,7 @@ public class World implements Runnable {
             }
         }  
         
-        return counter - 1;
+        cell.setAmountOfLiveNeighbours(cell.getValue() == 1 ? counter - 1 : counter);
     }
 
     /*
@@ -70,10 +70,9 @@ public class World implements Runnable {
     */
 
     private void setCellState(Cell cell) {
-        int amountOfLiveNeightbours = countLiveNeighbours(cell);
-        if(cell.getValue() == 1 && ( amountOfLiveNeightbours == 2 || amountOfLiveNeightbours == 3 )){
+        if(cell.getValue() == 1 && ( cell.getAmountOfLiveNeighbours() == 2 || cell.getAmountOfLiveNeighbours() == 3 )){
             cell.setValue(1);
-        }else if(cell.getValue() == 0 && amountOfLiveNeightbours == 3){
+        }else if(cell.getValue() == 0 && cell.getAmountOfLiveNeighbours()  == 3){
             cell.setValue(1);
         } else {
             cell.setValue(0);
@@ -102,10 +101,14 @@ public class World implements Runnable {
     public void next(){
         for (int row = 0; row < WORLD_MAX_SIZE; row++) {
             for (int col = 0; col < WORLD_MAX_SIZE; col++) {
+                countLiveNeighbours(grid[row][col]);
+            }
+        }
+        for (int row = 0; row < WORLD_MAX_SIZE; row++) {
+            for (int col = 0; col < WORLD_MAX_SIZE; col++) {
                 setCellState(grid[row][col]);
             }
         }
-        System.out.println(this);
         // toMatrix(this.cellToInt());
     }
 
@@ -115,7 +118,6 @@ public class World implements Runnable {
         //this is not a good solution -> hovering is not supported
         
 
-        System.out.println(cursor.getSelectedPattern().getLength());
         for (int row = cursor.getY(); row < cursor.getY() + cursor.getSelectedPattern().getLength(); row++) {
             for (int col = cursor.getX(); col <  cursor.getX() + cursor.getSelectedPattern().getWidth(); col++) {
                 if(grid[cursor.getY() + counterY][cursor.getX() + counterX].getValue() == 0){

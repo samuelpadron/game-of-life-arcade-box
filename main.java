@@ -5,17 +5,19 @@ import model.patterns.blockPattern;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
+import model.patterns.*;
 public class main {
     
     public static void main(String[] args){
         // Controller controller = new Controller("bruh");
         World world = World.getInstance();
-        try{
-            world.toFile();
-        }catch(Exception e){
-            System.out.println(e.toString());
-        }
+		System.out.println("hello world");
+		world.setSelectedPattern(0);
+		world.placePattern();
+		System.out.print(world);
+		System.out.println("");
+		world.next();
+		System.out.println(world);
         // world.setSelectedPattern(0);
         // world.placePattern();
         // System.out.println(world);
@@ -28,5 +30,4 @@ public class main {
         // controlThread.start();
     }
 }
-
 

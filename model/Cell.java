@@ -4,6 +4,7 @@ public class Cell {
     private int row;
     private int col;
     private int value;
+	private int amountOfLiveNeighbours;
 
     public Cell(int row, int col){
         this.row = row;
@@ -34,4 +35,10 @@ public class Cell {
     public void setValue(int value) {
         this.value = value;
     }
+	public int getAmountOfLiveNeighbours() {
+		return amountOfLiveNeighbours;
+	}
+	public void setAmountOfLiveNeighbours(int amount){
+		this.amountOfLiveNeighbours = amount;
+	}
 }
