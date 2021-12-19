@@ -12,9 +12,15 @@ public class main {
         // Controller controller = new Controller("bruh");
         World world = World.getInstance();
 		System.out.println("hello world");
-		world.setSelectedPattern(0);
+		world.setSelectedPattern(2);
 		world.placePattern();
 		System.out.print(world);
+		System.out.println("");
+		world.next();
+		System.out.println(world);
+		System.out.println("");
+		world.next();
+		System.out.println(world);
 		System.out.println("");
 		world.next();
 		System.out.println(world);
