@@ -5,6 +5,7 @@ import model.patterns.*;
 public class Cursor {
     //this should become an array that will hold all of the patterns
     private Pattern[] patterns = {new blockPattern(), new blinkerPattern(), new gliderPattern()};
+	private int patternPointer = 2;
     private Pattern selectedPattern;
     private int x;
     private int y;
@@ -14,6 +15,7 @@ public class Cursor {
     public Cursor(){
         this.x = 52;
         this.y = 52;
+		setSelectedPattern(patternPointer);
     }
     //should return the currently selected pattern
     public Pattern getSelectedPattern() {
@@ -62,6 +64,24 @@ public class Cursor {
         }
     }
 
+	public void incrementPattern(){
+		if(patternPointer + 1 >= patterns.length){
+			patternPointer = 0;
+		}else{
+			patternPointer++;
+		}
 
+		setSelectedPattern(patternPointer);
+	}
+
+	public void decrementPattern(){
+		if(patternPointer - 1 < 0){
+			patternPointer = patterns.length;
+		}else{
+			patternPointer--;
+		}
+
+		setSelectedPattern(patternPointer);
+	}
     
 }

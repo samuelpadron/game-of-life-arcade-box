@@ -15,6 +15,7 @@ public class World implements Runnable {
     private final int SCREEN_MAX_SIZE = WORLD_MAX_SIZE - BORDER; 
     private Cell[][] grid = new Cell[WORLD_MAX_SIZE][WORLD_MAX_SIZE];
     private Cursor cursor = new Cursor();
+	private static final World instance = new World();
 
     private World(){
         for (int row = 0; row < grid.length; row++) {
@@ -40,10 +41,6 @@ public class World implements Runnable {
         return sb.toString();
     }
 
-    //temporary for testing
-    public void setCellAlive(int x, int y){
-        this.grid[x][y].setValue(1);
-    }
     
     public void countLiveNeighbours(Cell cell){
         int counter = 0;
@@ -79,24 +76,6 @@ public class World implements Runnable {
         }
     }
 
-    public int[] cellToInt() {
-
-    //Make a list to append values to
-    List<Integer> intList = new ArrayList<Integer>();
-    for (int i = 0; i < grid.length; i++) {
-        for (int j = 0; j < grid.length; j++) { 
-            intList.add(grid[i][j].getValue()); 
-        }
-    }
-
-    //Make the 1d array to send to C++
-    int[] intVersion = new int[intList.size()];
-    for (int i = 0; i < intVersion.length; i++) {
-        intVersion[i] = intList.get(i);
-    }
-
-    return intVersion;
-    }
 
     public void next(){
         for (int row = 0; row < WORLD_MAX_SIZE; row++) {
@@ -115,7 +94,6 @@ public class World implements Runnable {
     public void placePattern(){
         int counterY = 0;
         int counterX = 0;
-        //this is not a good solution -> hovering is not supported
         
 
         for (int row = cursor.getY(); row < cursor.getY() + cursor.getSelectedPattern().getLength(); row++) {
@@ -136,21 +114,25 @@ public class World implements Runnable {
     public String getCursorPosition(){
         return String.valueOf(cursor.getX()) + ", " + String.valueOf(cursor.getY());
     }
+
     public void setSelectedPattern(int index){
         cursor.setSelectedPattern(index);
     }
+
+	public void incrementPattern(){
+		cursor.incrementPattern();
+	}
+	public void decrementPattern(){
+		cursor.decrementPattern();
+	}
     
     public void run() {
-        // Timer timer = new Timer();
-        // timer.scheduleAtFixedRate(new Clock(), 0, 1000);
-		while(true){
-			this.next();
-			System.out.println("next is calculated");
-		}
+         Timer timer = new Timer();
+         timer.scheduleAtFixedRate(new Clock(), 0, 1000);
     }
 
     public static World getInstance(){
-        return new World();
+        return instance;
     }
 
     public void toFile() throws IOException{
@@ -169,7 +151,6 @@ public class World implements Runnable {
     }
 
 
-    // private native void toMatrix(int[] intGrid);
     
    
 }

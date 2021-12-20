@@ -46,21 +46,24 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
     public void keyPressed(KeyEvent e) {
         // displayInfo(e, "KEY PRESSED: ");
         System.out.println(world);
-        if(e.getKeyCode() == 37){
+        if(e.getKeyCode() == 37){ //<-
             world.move(Direction.LEFT);
-            System.out.println(world.getCursorPosition());
-        }else if((e.getKeyCode() == 38)){
+        }else if((e.getKeyCode() == 38)){//^
             world.move(Direction.UP);
-            System.out.println(world.getCursorPosition());
-        }else if((e.getKeyCode() == 39)){
+        }else if((e.getKeyCode() == 39)){//->
             world.move(Direction.RIGHT);
-            System.out.println(world.getCursorPosition());
-        }else if((e.getKeyCode() == 40)){
-            world.move(Direction.DOWN);
-            System.out.println(world.getCursorPosition());
-        } System.out.println(world.getCursorPosition());
+        }else if((e.getKeyCode() == 40)){//v
+		    world.move(Direction.DOWN);
+		}else if((e.getKeyCode() == 68 )){
+			world.incrementPattern();	
+		}else if((e.getKeyCode() == 65)){
+			world.decrementPattern();	
+		}else if((e.getKeyCode() == 83)){
+			world.placePattern();	
+		}
 
-    }
+
+	}
 
     @Override
     public void keyReleased(KeyEvent e) {
