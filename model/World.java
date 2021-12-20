@@ -13,6 +13,9 @@ public class World implements Runnable {
     private final int WORLD_MAX_SIZE = 104;
     private final int BORDER = 20;
     private final int SCREEN_MAX_SIZE = WORLD_MAX_SIZE - BORDER; 
+    private final int SPEED_MAX = 100;
+    private final int SPEED_MIN = 2000;
+    private int speed = 500;
     private Cell[][] grid = new Cell[WORLD_MAX_SIZE][WORLD_MAX_SIZE];
     private Cursor cursor = new Cursor();
 	private static final World instance = new World();
@@ -128,7 +131,7 @@ public class World implements Runnable {
     
     public void run() {
          Timer timer = new Timer();
-         timer.scheduleAtFixedRate(new Clock(), 0, 1000);
+         timer.scheduleAtFixedRate(new Clock(), 0, speed);
     }
 
     public static World getInstance(){
@@ -150,7 +153,17 @@ public class World implements Runnable {
         writer.close();
     }
 
-
-    
-   
+    public void setSpeed(int speed){
+        this.speed = speed;
+    }
+    public void incrementSpeed(){
+        if (this.speed - 100 >= SPEED_MAX) {
+            this.speed -= 100;
+        }
+    }
+    public void decrementSpeed(){
+        if (this.speed + 100 <= SPEED_MIN) {
+            this.speed += 100;
+        }
+    }
 }
