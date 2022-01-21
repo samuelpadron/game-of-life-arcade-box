@@ -10,7 +10,7 @@ public class World implements Runnable {
   private final int SCREEN_MAX_SIZE = WORLD_MAX_SIZE - BORDER;
   private final int SPEED_MAX = 100;
   private final int SPEED_MIN = 2000;
-  private int speed = 500;
+  private int speed = 2000;
   private Cell[][] grid = new Cell[WORLD_MAX_SIZE][WORLD_MAX_SIZE];
   private Cursor cursor = new Cursor();
   private int cursorPosX = cursor.getX();
@@ -30,17 +30,14 @@ public class World implements Runnable {
     for (int row = BORDER; row < SCREEN_MAX_SIZE; row++) {
       for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
         // sb.append(grid[row][col].getValue() == 1 ? "*" : ".");
-        if (grid[row][col].getValue() == 1 && (row != cursorPosY && cursorPosX != col)) {
+        if (grid[row][col].getValue() == 1 && !(row == cursorPosY && cursorPosX == col)) {
           sb.append('*');
         }
-        if (grid[row][col].getValue() == 1 && (row == cursorPosY && cursorPosX == col)) {
+        if (row == cursorPosY && cursorPosX == col) {
           sb.append('X');
         }
-        if (grid[row][col].getValue() == 0 && (row != cursorPosY && cursorPosX != col)) {
+        if (grid[row][col].getValue() == 0 && !(row == cursorPosY && cursorPosX == col)) {
           sb.append('.');
-        }
-        if (grid[row][col].getValue() == 0 && (row == cursorPosY && cursorPosX == col)) {
-          sb.append('X');
         }
         sb.append("|");
       }
