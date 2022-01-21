@@ -14,7 +14,7 @@ public class World implements Runnable {
     private Cell[][] grid = new Cell[WORLD_MAX_SIZE][WORLD_MAX_SIZE];
     private Cursor cursor = new Cursor();
     private int cursorPosX = cursor.getX();
-    private int cursorPosY= cursor.getY();
+    private int cursorPosY = cursor.getY();
     private static final World instance = new World();
 
     private World() {
@@ -29,7 +29,6 @@ public class World implements Runnable {
         StringBuilder sb = new StringBuilder();
         for (int row = BORDER; row < SCREEN_MAX_SIZE; row++) {
             for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
-                // sb.append(grid[row][col].getValue() == 1 ? "*" : ".");
                 if (grid[row][col].getValue() == 1 && !(row == cursorPosY && cursorPosX == col)) {
                     sb.append('*');
                 }
