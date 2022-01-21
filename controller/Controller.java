@@ -62,6 +62,7 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
             //debugging purposes only "spacebar"
             world.next();
         }
+            System.out.println(world);
     }
 
     @Override

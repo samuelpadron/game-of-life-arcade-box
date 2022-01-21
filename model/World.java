@@ -29,6 +29,7 @@ public class World implements Runnable {
         StringBuilder sb = new StringBuilder();
         for (int row = BORDER; row < SCREEN_MAX_SIZE; row++) {
             for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
+                countLiveNeighbours(grid[row][col]);
                 if (grid[row][col].getValue() == 1 && !(row == cursorPosY && cursorPosX == col)) {
                     sb.append('*');
                 }
@@ -39,6 +40,9 @@ public class World implements Runnable {
                     sb.append('.');
                 }
                 sb.append("|");
+                if (grid[row][col].getAmountOfLiveNeighbours() > 0) {
+                    System.out.println(grid[row][col].getAmountOfLiveNeighbours());
+                }
             }
             sb.append("\n");
             for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
@@ -53,8 +57,8 @@ public class World implements Runnable {
         int counter = 0;
         int startPosX = cell.getCol() - 1 < 0 ? cell.getCol() : cell.getCol() - 1;
         int startPosY = cell.getRow() - 1 < 0 ? cell.getRow() : cell.getRow() - 1;
-        int endPosX = cell.getCol() + 1 > 63 ? cell.getCol() : cell.getCol() + 1;
-        int endPosY = cell.getRow() + 1 > 63 ? cell.getRow() : cell.getRow() + 1;
+        int endPosX = cell.getCol() + 1 > 83 ? cell.getCol() : cell.getCol() + 1;
+        int endPosY = cell.getRow() + 1 > 83 ? cell.getRow() : cell.getRow() + 1;
 
         for (int row = startPosY; row <= endPosY; row++) {
             for (int col = startPosX; col <= endPosX; col++) {
