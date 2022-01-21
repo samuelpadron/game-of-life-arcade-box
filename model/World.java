@@ -13,8 +13,8 @@ public class World implements Runnable {
     private int speed = 2000;
     private Cell[][] grid = new Cell[WORLD_MAX_SIZE][WORLD_MAX_SIZE];
     private Cursor cursor = new Cursor();
-    private int cursorPosX = cursor.getx();
-    private int cursorposy = cursor.gety();
+    private int cursorPosX = cursor.getX();
+    private int cursorPosY= cursor.getY();
     private static final World instance = new World();
 
     private World() {
@@ -116,7 +116,7 @@ public class World implements Runnable {
     public void move(Direction direction) {
         switch (direction) {
             case UP:
-                if (cursorPosY - 1 > SCREEN_MIN_SIZE)
+                if (cursorPosY - 1 > BORDER)
                     cursorPosY--;
                 break;
             case DOWN:
@@ -124,14 +124,15 @@ public class World implements Runnable {
                     cursorPosY++;
                 break;
             case LEFT:
-                if (cursorPosX - 1 > SCREEN_MIN_SIZE)
+                if (cursorPosX - 1 > BORDER)
                     cursorPosX--;
                 break;
             case RIGHT:
-                if (cursorPosX + 1 > SCREEN_MAX_SIZE)
+                if (cursorPosX + 1 < SCREEN_MAX_SIZE)
                     cursorPosX++;
                 break;
         }
+        cursor.updateCursorLocation(cursorPosX, cursorPosY);
     }
 
     public String getCursorPosition() {
@@ -188,10 +189,5 @@ public class World implements Runnable {
         if (this.speed + 100 <= SPEED_MIN) {
             this.speed += 100;
         }
-    }
-
-    public void updateCursorLocation(int x, int y) {
-        this.cursorPosX = x;
-        this.cursorPosY = y;
     }
 }

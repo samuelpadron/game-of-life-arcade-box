@@ -47,30 +47,9 @@ public class Cursor {
         this.y = y;
     }
 
-    public void move(Direction direction) {
-        switch (direction) {
-            case UP:
-                if (y - 1 > SCREEN_MIN_SIZE)
-                    y--;
-                break;
-            case DOWN:
-                if (y + 1 < SCREEN_MAX_SIZE)
-                    y++;
-                break;
-            case LEFT:
-                if (x - 1 > SCREEN_MIN_SIZE)
-                    x--;
-                break;
-            case RIGHT:
-                if (x + 1 > SCREEN_MAX_SIZE)
-                    x++;
-                break;
-        }
-        try {
-            world.updateCursorLocation(x, y);
-        } catch (Exception e) {
-            System.out.println("why");
-        }
+    public void updateCursorLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void incrementPattern() {

@@ -45,7 +45,6 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
     @Override
     public void keyPressed(KeyEvent e) {
         // displayInfo(e, "KEY PRESSED: ");
-        System.out.println(world);
         if (e.getKeyCode() == 37) { // <-
             world.move(Direction.LEFT);
         } else if ((e.getKeyCode() == 38)) {// ^
@@ -60,11 +59,9 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
             world.decrementPattern();
         } else if ((e.getKeyCode() == 83)) {
             world.placePattern();
-        } else if ((e.getKeyCode() == 49)) {
+        } else if ((e.getKeyCode() == 32)) {
             world.next();
-            System.out.println(world);
         }
-
     }
 
     @Override
@@ -79,7 +76,7 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
     }
 
     // This is not needed in the end product
-        @Override
+    @Override
     public void run() {
         createAndShowGUI();
     }
