@@ -43,8 +43,8 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == 37) { // <-
+    public void keyPressed(KeyEvent e) {    //KEY
+        if (e.getKeyCode() == 37) {         // <-
             world.move(Direction.LEFT);
         } else if ((e.getKeyCode() == 38)) {// ^
             world.move(Direction.UP);
@@ -52,12 +52,16 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
             world.move(Direction.RIGHT);
         } else if ((e.getKeyCode() == 40)) {// v
             world.move(Direction.DOWN);
-        } else if ((e.getKeyCode() == 68)) {
+        } else if ((e.getKeyCode() == 68)) {//d
             world.incrementPattern();
-        } else if ((e.getKeyCode() == 65)) {
+        } else if ((e.getKeyCode() == 65)) {//a
             world.decrementPattern();
-        } else if ((e.getKeyCode() == 83)) {
+        } else if ((e.getKeyCode() == 83)) {//s
             world.placePattern();
+        } else if ((e.getKeyCode() == 69)) {//e
+            world.incrementSpeed();
+        } else if ((e.getKeyCode() == 81)) {//q
+            world.decrementSpeed();
         } else if ((e.getKeyCode() == 32)) {
             //debugging purposes only "spacebar"
             world.next();
