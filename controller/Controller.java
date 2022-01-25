@@ -68,9 +68,9 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
         }
             //System.out.println(world);
             try {
-              World.toFile();
-            } catch (Exception e) {
-              System.out.println(e);
+              world.toFile();
+            } catch (Exception k) {
+              System.out.println(k);
             }
     }
 
