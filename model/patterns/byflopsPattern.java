@@ -19,16 +19,15 @@ public class byflopsPattern extends Pattern {
 		pattern[1][1].setValue(1);
         pattern[1][3].setValue(1);
 
-        pattern[2][6].setValue(1);
+        pattern[2][5].setValue(1);
 
         pattern[3][0].setValue(1);
         pattern[3][1].setValue(1);
         pattern[3][2].setValue(1);
         pattern[3][3].setValue(1);
         pattern[3][4].setValue(1);
-        pattern[3][5].setValue(1);
 
-        pattern[4][6].setValue(1);
+        pattern[4][5].setValue(1);
 
         pattern[5][1].setValue(1);
         pattern[5][3].setValue(1);
