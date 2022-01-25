@@ -253,6 +253,9 @@ public:
             if(grid[i][j] == 1){
               canvas()->SetPixel(i, j, 0, 0, 255);
             }
+            if(grid[i][j] == 2){
+              canvas()->SetPixel(i, j, 255, 0, 0);
+            }
             
           }
         }

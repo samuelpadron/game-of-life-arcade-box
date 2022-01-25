@@ -167,7 +167,11 @@ public class World implements Runnable {
         StringBuilder sb = new StringBuilder();
         for (int row = BORDER; row < SCREEN_MAX_SIZE; row++) {
             for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
-                sb.append(grid[row][col].getValue());
+                if (row == cursorPosY && cursorPosX == col) {
+                    sb.append(2);
+                }else{
+                    sb.append(grid[row][col].getValue());
+                }
             }
             sb.append("\n");
             for (int col = BORDER; col < SCREEN_MAX_SIZE; col++) {
