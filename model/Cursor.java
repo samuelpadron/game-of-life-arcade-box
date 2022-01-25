@@ -5,7 +5,7 @@ import model.patterns.*;
 public class Cursor {
     // this should become an array that will hold all of the patterns
     private Pattern[] patterns = { new blockPattern(), new blinkerPattern(), new gliderPattern(), new dieHardPattern(),
-            new pulsarPattern() };
+            new pulsarPattern(), new R-pentominoPattern() };
     private int patternPointer = 0;
     private Pattern selectedPattern;
     private int x;
