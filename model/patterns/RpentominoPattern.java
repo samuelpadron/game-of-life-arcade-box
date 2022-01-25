@@ -3,14 +3,14 @@ package model.patterns;
 import model.Cell;
 import model.Pattern;
 
-public class R-pentominoPattern {
+public class RpentominoPattern extends Pattern {
   private final int LENGTH = 3;
   private final int WIDTH = 3;
 
-  public R-pentominoPattern() {
+  public RpentominoPattern() {
     this.pattern = new Cell[LENGTH][WIDTH];
     for (int row = 0; row < LENGTH; row++) {
-      for (int col = 0l col < WIDTH; col++) {
+      for (int col = 0; col < WIDTH; col++) {
         pattern[row][col] = new Cell(row, col);
       }
     }
