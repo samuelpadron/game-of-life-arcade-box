@@ -19,12 +19,16 @@ public class World implements Runnable {
     private static final World instance = new World();
 
     private World() {
+        makeCleanGrid();
+    }
+
+    public void makeCleanGrid(){
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid.length; col++) {
                 grid[row][col] = new Cell(row, col);
             }
         }
-    }
+  }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -195,6 +199,11 @@ public class World implements Runnable {
             timer.purge();
             timer = new Timer();
             timer.scheduleAtFixedRate(new Clock(), 0, speed);
+        }else{
+            timer.cancel();
+            timer.purge();
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new Clock(), 0, speed);
         }
     }
 
@@ -202,6 +211,11 @@ public class World implements Runnable {
         if (this.speed + 100 <= SPEED_MIN) {
             this.speed += 100;
             System.out.println(this.speed);
+            timer.cancel();
+            timer.purge();
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new Clock(), 0, speed);
+        }else{
             timer.cancel();
             timer.purge();
             timer = new Timer();
