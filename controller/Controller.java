@@ -65,8 +65,10 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
         } else if ((e.getKeyCode() == 32)) {
             //debugging purposes only "spacebar"
             world.next();
+        } else if ((e.getKeyCode() == 87)) {//w
+            world.pauseGrid();
         }
-            //System.out.println(world);
+            System.out.println(world);
             try {
               world.toFile();
             } catch (Exception k) {

@@ -182,8 +182,9 @@ public class World implements Runnable {
         writer.close();
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void pauseGrid() {
+       timer.cancel();  
+       timer.purge();
     }
 
     public void incrementSpeed() {
