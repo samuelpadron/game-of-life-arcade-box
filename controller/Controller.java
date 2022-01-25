@@ -67,7 +67,10 @@ public class Controller extends JFrame implements KeyListener, ActionListener, R
             world.next();
         } else if ((e.getKeyCode() == 87)) {//w
             world.pauseGrid();
+        } else if ((e.getKeyCode() == 90)) {//z
+            world.makeCleanGrid();
         }
+
             System.out.println(world);
             try {
               world.toFile();
