@@ -1,4 +1,6 @@
-# CONTROLS
+# THE GAME OF LIFE ARCADE
+
+## CONTROLS
 | KEY | Description |
 | ------ | ----------- |
 | JOYSTICK_UP   | Moves cursor upwards. |
@@ -12,9 +14,31 @@
 | TOP_PINK   | Increases game speed. |
 | BOTTOM_PINK | Decreases game speed. |
 
-# RGB Matrix
+## PATTERNS
 
-```
-sudo ./demo -D0 --led-slowdown-gpio=4 --led-no-hardware-pulse --led-chain=4 --led-pixel-mapper=U-mapper;Rotate:180
-```
+### STATIC
+
+- Beehive
+- Block
+
+### OSCILLATOR
+
+- Blinker
+- Byflops
+- Pulsar
+
+### SPACESHIP
+
+- Glider
+
+### METHUSELAH
+
+- Die hard
+- R-pentomino
+
+### OTHER
+
+- Pixel
+
+
 
