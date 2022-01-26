@@ -20,6 +20,7 @@
 
 - Beehive
 - Block
+- Bun
 
 ### OSCILLATOR
 
