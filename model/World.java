@@ -17,8 +17,6 @@ public class World implements Runnable {
     private int cursorPosX = cursor.getX();
     private int cursorPosY = cursor.getY();
     private static final World instance = new World();
-    
-    private boolean isPaused = false;
 
     private World() {
         makeCleanGrid();
@@ -189,14 +187,8 @@ public class World implements Runnable {
     }
 
     public void pauseGrid() {
-      if(!isPaused) {
        timer.cancel();  
        timer.purge();
-       isPaused = true;
-      } else {
-       timer = new Timer();
-       timer.scheduleAtFixedRate(new Clock(), 0, speed);
-      }
     }
 
     public void incrementSpeed() {
